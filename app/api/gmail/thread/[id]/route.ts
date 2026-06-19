@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
+    
     return NextResponse.json({
       success: true,
       message: 'Gmail thread endpoint - implementation pending',
-      threadId: params.id,
+      threadId: id,
     });
   } catch (error) {
     return NextResponse.json(
@@ -14,3 +19,4 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
     );
   }
 }
+
